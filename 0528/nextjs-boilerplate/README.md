@@ -66,9 +66,9 @@ Visit `http://localhost:3000`.
 3. Add `DIRECT_URL` to Vercel environment variables for `prisma migrate deploy`. Use the direct, non-pooler connection string.
 4. Add `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`, and `AUTH_SECRET` to Vercel environment variables.
 5. Add `AUTH_URL=https://your-app.vercel.app` to Vercel environment variables.
-6. Make sure the build command runs migrations:
+6. The `vercel-build` script automatically baselines an existing production database on the first deploy, then runs migrations and the Next.js build:
    ```bash
-   npx prisma migrate deploy
+   npm run vercel-build
    ```
 7. Update Google OAuth authorized redirect URIs to include:
    `https://your-app.vercel.app/api/auth/callback/google`
