@@ -10,6 +10,20 @@ export const authConfig = {
     signIn: "/login",
   },
   callbacks: {
+    jwt({ token, user }) {
+      if (user?.id) {
+        token.sub = user.id
+      }
+
+      return token
+    },
+    session({ session, token }) {
+      if (session.user && token.sub) {
+        session.user.id = token.sub
+      }
+
+      return session
+    },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user
       const isOnDashboard = nextUrl.pathname.startsWith("/dashboard")
@@ -20,7 +34,7 @@ export const authConfig = {
       }
 
       if (isOnLogin && isLoggedIn) {
-        return Response.redirect(new URL("/dashboard", nextUrl))
+        return Response.redirect(new URL("/board", nextUrl))
       }
 
       return true

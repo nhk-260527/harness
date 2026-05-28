@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "App",
-  description: "Next.js boilerplate",
+  title: "Neighborhood Cafe",
+  description: "A public cafe-style board with posts and comments.",
 }
 
 export default function RootLayout({

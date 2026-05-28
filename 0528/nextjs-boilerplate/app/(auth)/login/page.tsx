@@ -1,11 +1,6 @@
-import { signIn } from "@/lib/auth"
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { signIn } from "@/lib/auth"
 
 export default async function LoginPage({
   searchParams,
@@ -15,21 +10,21 @@ export default async function LoginPage({
   const { error } = await searchParams
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-muted/40">
+    <div className="flex min-h-screen items-center justify-center bg-muted/40">
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-center text-2xl">Sign in</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
-          {error && (
-            <p className="text-sm text-destructive text-center">
+          {error ? (
+            <p className="text-center text-sm text-destructive">
               Authentication failed. Please try again.
             </p>
-          )}
+          ) : null}
           <form
             action={async () => {
               "use server"
-              await signIn("google", { redirectTo: "/dashboard" })
+              await signIn("google", { redirectTo: "/board" })
             }}
           >
             <Button type="submit" className="w-full">
